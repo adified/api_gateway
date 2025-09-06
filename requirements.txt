@@ -1,0 +1,6 @@
+requests
+Django
+djangorestframework
+django-cors-headers
+redis
+django-redis
