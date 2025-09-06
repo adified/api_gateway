@@ -34,3 +34,22 @@ class Service(models.Model):
     class Meta:
         verbose_name = "Service"
         verbose_name_plural = "Services"
+
+class RequestLog(models.Model):
+    """model to store request logs"""
+    timestamp = models.DateTimeField(auto_now_add=True)
+    api_key = models.ForeignKey(APIKey, on_delete=models.SET_NULL, null=True, blank=True)
+    service = models.ForeignKey(Service, on_delete=models.SET_NULL, null=True, blank=True)
+    path = models.CharField(max_length=500)
+    method = models.CharField(max_length=10)
+    status_code = models.IntegerField()
+    error_message = models.TextField(blank=True, null=True)
+    duration_ms = models.FloatField(help_text="Request duration in milliseconds")
+    
+    def __str__(self):
+        return f"{self.method} {self.path} - {self.status_code} ({self.timestamp})"
+    
+    class Meta:
+        verbose_name = "Request Log"
+        verbose_name_plural = "Request Logs"
+        ordering = ['-timestamp']
