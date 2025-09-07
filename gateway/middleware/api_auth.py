@@ -1,12 +1,16 @@
 from django.http import JsonResponse
 from django.utils.deprecation import MiddlewareMixin
-from .models import APIKey
+from gateway.models import APIKey
 
 
 class APIAuthMiddleware(MiddlewareMixin):
     def process_request(self, request):
-
-        api_key = request.META.get('X-API-KEY')
+        
+        # ignore admin request
+        if request.path.startswith(('/admin/')):
+            return None
+        
+        api_key = request.META.get('HTTP_X_API_KEY')
         
         if not api_key:
             return JsonResponse({'error': 'Unauthorized'}, status=401)

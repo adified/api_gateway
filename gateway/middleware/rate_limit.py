@@ -6,6 +6,10 @@ from django.conf import settings
 
 class RateLimitMiddleware(MiddlewareMixin):
     def process_request(self, request):
+
+        # ignore admin request
+        if request.path.startswith(('/admin/')):
+            return None
         
         # check for api_key as defined in the auth middleware
         if not hasattr(request, 'api_key'):
