@@ -16,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from gateway.views import ProxyView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('<path:path>', ProxyView.as_view(), name='proxy'),
+    path('', ProxyView.as_view(), name='proxy-root'),
 ]
