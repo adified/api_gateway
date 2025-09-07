@@ -14,3 +14,37 @@ env/
 # IDEs
 .vscode/
 .idea/
+
+# Django
+db.sqlite3
+*.sqlite3
+media/
+staticfiles/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Test and coverage
+.pytest_cache/
+.coverage*
+htmlcov/
+
+# Type checkers / linters / tooling caches
+.mypy_cache/
+.ruff_cache/
+.tox/
+.cache/
+
+# Packaging/build artifacts
+dist/
+build/
+pip-wheel-metadata/
+
+# OS
+Thumbs.db
