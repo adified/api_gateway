@@ -1,10 +1,14 @@
 from django.db import models
 import secrets
 
+
+def generate_api_key():
+    return secrets.token_urlsafe(32)
+
 # Create your models here.
 class APIKey(models.Model):
     """model to store API keys for auth"""
-    key = models.CharField(max_length=64, unique=True, default=lambda: secrets.token_urlsafe(32))
+    key = models.CharField(max_length=64, unique=True, default=generate_api_key)
     name = models.CharField(max_length=100, help_text="name for API keys")
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
